@@ -5,17 +5,19 @@ public class BurnInputStream implements BurnStream {
 
     @Override
     public int getNextBurn(DescentEvent status) {
-        String[] tokens = scanner.nextLine().split(" ");
-        if (tokens.length > 0) {
-            while (true) {
-                try {
-                    int burn = Integer.parseInt(tokens[0]);
+        while (true) {
+            try {
+                System.out.print("Enter burn rate (0-200): ");
+                String input = scanner.nextLine().trim();
+                int burn = Integer.parseInt(input);
+                if (burn >= 0 && burn <= 200) {
                     return burn;
-                } catch (NumberFormatException e) {
-                    System.err.println("Must Enter a Number (0-200)");
+                } else {
+                    System.err.println("Burn rate must be between 0 and 200");
                 }
+            } catch (NumberFormatException e) {
+                System.err.println("Must Enter a Number (0-200)");
             }
         }
-        return 0;
     }
 }
