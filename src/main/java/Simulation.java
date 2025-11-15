@@ -1,3 +1,5 @@
+
+
 public class Simulation {
     private final Vehicle vehicle;
 
@@ -73,9 +75,9 @@ public class Simulation {
     }
 
     public static void main(String[] args) {
-        // create a new Simulation object with a random starting altitude
-        // create a new BurnInputStream
-        // pass the new BurnInputStream to the runSimulation method
+        Simulation game = new Simulation(new Vehicle(Simulation.randomaltitude()));
+        BurnStream burnSource = new BurnInputStream();
+        game.runSimulation(burnSource);
     }
 
 }
