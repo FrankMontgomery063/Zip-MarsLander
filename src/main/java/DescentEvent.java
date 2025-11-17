@@ -20,6 +20,11 @@ public class DescentEvent {
     public int getAltitude() {
         return this.Altitude;
     }
+    
+    public int getFuel() {
+        return this.Fuel;
+    }
+    
     public int getStatus() { return this.Status; }
     @Override
     public String toString() {

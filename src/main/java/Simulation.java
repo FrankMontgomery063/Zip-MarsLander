@@ -59,6 +59,7 @@ public class Simulation {
             status = vehicle.getStatus(burnInterval);
             System.out.print(status.toString()+"\t\t");
             vehicle.adjustForBurn(burnSource.getNextBurn(status));
+            vehicle.checkFinalStatus(); // Update Flying status
             if (vehicle.outOfFuel()) {
                 break;
             }
@@ -68,10 +69,7 @@ public class Simulation {
             }
         }
         printString(vehicle.checkFinalStatus());
-        if (status != null) {
-            return status.getStatus();
-        }
-        return -1;
+        return vehicle.Flying;
     }
 
     public static void main(String[] args) {

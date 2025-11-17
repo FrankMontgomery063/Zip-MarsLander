@@ -1,7 +1,8 @@
 public class Vehicle {
 
     public Vehicle(int InitialAltitude) {
-        // initialize the altitude AND previous altitude to initialAltitude
+        this.Altitude = InitialAltitude;
+        this.PrevAltitude = InitialAltitude;
     }
 
     int Gravity = 100;
@@ -35,12 +36,10 @@ public class Vehicle {
             if (this.Velocity > 10) {
                 s = dead;
                 Flying = DEAD;
-            }
-            if (this.Velocity < 10 && this.Velocity > 3) {
+            } else if (this.Velocity > 3) {
                 s = crashed;
                 Flying = CRASHED;
-            }
-            if (this.Velocity < 3) {
+            } else {
                 s = success;
                 Flying = SUCCESS;
             }
@@ -53,31 +52,29 @@ public class Vehicle {
     }
 
     public int computeDeltaV() {
-        // return velocity + gravity - burn amount
-        return 0;
+        return Gravity - this.Burn;
+        
     }
 
     public void adjustForBurn(int burnAmount) {
-        // set burn to burnamount requested
-        // save previousAltitude with current Altitude
-        // set new velocity to result of computeDeltaV function.
-        // subtract speed from Altitude
-        // subtract burn amount fuel used from tank
+        this.Burn = burnAmount;
+        this.PrevAltitude = this.Altitude;
+        this.Velocity = this.Velocity + computeDeltaV();
+        this.Altitude = this.Altitude - this.Velocity;
+        this.Fuel = this.Fuel - burnAmount;
     }
 
     public boolean stillFlying() {
-        // return true if altitude is positive
-        return false;
+        return this.Altitude > 0;
+        
     }
     public boolean outOfFuel() {
-        // return true if fuel is less than or equal to zero
-        return true;
+        return this.Fuel <= 0;
     }
 
     public DescentEvent getStatus(int tick) {
-        // create a return a new DescentEvent object
-        // filled in with the state of the vehicle.
-        return null;
+        return new DescentEvent(tick, this.Velocity, this.Fuel, this.Altitude, this.Flying);
+
     }
 
 }

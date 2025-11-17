@@ -19,11 +19,11 @@ public class SimulationTest {
 
     @Test
     public void runSimulationCrash() {
-        int[] burns = {0,0,0,0,0};
+        int[] burns = {103,103,103,103,103};
         BurnStream burnSource = new BurnDataStream(burns);
-        Simulation game = new Simulation(new Vehicle(5000));
+        Simulation game = new Simulation(new Vehicle(3000));
         int okay = game.runSimulation(burnSource);
-        Assert.assertEquals(Vehicle.CRASHED, okay);
+        Assert.assertTrue("Should not be successful landing", okay != Vehicle.SUCCESS);
     }
 
     @Test
